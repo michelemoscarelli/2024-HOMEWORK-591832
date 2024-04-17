@@ -7,10 +7,11 @@ import org.junit.Test;
 import it.uniroma3.diadia.Partita;
 
 public class PartitaTest {
-	private Partita partita = new Partita();
+	private Partita partita;
 	
 	@Before
 	public void setUp() {
+		this.partita = new Partita();
 	}
 	
 	/* test isFinita */
@@ -34,4 +35,16 @@ public class PartitaTest {
 		assertFalse(this.partita.isFinita());
 	}
 
+	
+	/* test vinta */
+	@Test
+	public void testVinta_Vittoria() {
+		this.partita.getLabirinto().setStanzaCorrente(this.partita.getLabirinto().getStanzaVincente());
+		assertTrue(this.partita.vinta());
+	}
+	
+	@Test
+	public void testVinta_Sconfitta() {
+		assertFalse(this.partita.vinta());
+	}
 }
